@@ -2,9 +2,10 @@
 /dts-v1/;
 
 #include "aspeed-g5.dtsi"
+#include <dt-bindings/gpio/aspeed-gpio.h>
 
 / {
-	model = "AST2500 EVB";
+	model = "Unifi Server BMC";
 	compatible = "aspeed,ast2500";
 
 	aliases {
@@ -25,12 +26,42 @@
 		#size-cells = <1>;
 		ranges;
 
+		vga_memory: framebuffer@9f000000 {
+			no-map;
+			reg = <0x9f000000 0x01000000>; /* 16M */
+		};
+
+		flash_memory: region@98000000 {
+			no-map;
+			reg = <0x98000000 0x04000000>; /* 64M */
+		};
+
 		gfx_memory: framebuffer {
 			size = <0x01000000>;
 			alignment = <0x01000000>;
 			compatible = "shared-dma-pool";
 			reusable;
 		};
+
+		video_engine_memory: jpegbuffer {
+			size = <0x02000000>;	/* 32M */
+			alignment = <0x01000000>;
+			compatible = "shared-dma-pool";
+			reusable;
+		};
+	};
+
+	iio-hwmon {
+		compatible = "iio-hwmon";
+		io-channels = <&adc 1>, <&adc 2>, <&adc 3>, <&adc 4>,
+			<&adc 5>, <&adc 6>, <&adc 7>, <&adc 8>,
+			<&adc 9>, <&adc 10>, <&adc 11>, <&adc 12>,
+			<&adc 13>, <&adc 14>, <&adc 15>;
+	};
+
+	iio-hwmon-battery {
+		compatible = "iio-hwmon";
+		io-channels = <&adc 0>;
 	};
 };
 
@@ -59,8 +90,24 @@
 	status = "okay";
 };
 
+&lpc_ctrl {
+	status = "okay";
+	memory-region = <&flash_memory>;
+	flash = <&spi1>;
+};
+
+&lpc_snoop {
+	status = "okay";
+	snoop-ports = <0x80>;
+};
+
 &uart5 {
 	status = "okay";
+};
+
+&p2a {
+	status = "okay";
+	memory-region = <&vga_memory>;
 };
 
 &mac0 {
@@ -77,26 +124,147 @@
 	pinctrl-0 = <&pinctrl_rgmii2_default &pinctrl_mdio2_default>;
 };
 
-&i2c3 {
+&i2c0 {
 	status = "okay";
-
-	eeprom@50 {
-		compatible = "atmel,24c08";
-		reg = <0x50>;
-		pagesize = <16>;
-	};
 };
 
-&i2c7 {
+&i2c1 {
 	status = "okay";
+};
+
+&i2c2 {
+	status = "okay";
+};
+
+&i2c3 {
+	status = "okay";
+};
+
+&i2c4 {
+	status = "okay";
+};
+
+&i2c5 {
+	status = "okay";
+};
+
+&i2c6 {
+	status = "okay";
+
+	lm75@49 {
+		compatible = "national,lm75";
+		reg = <0x49>;
+	};
 
 	lm75@4d {
 		compatible = "national,lm75";
 		reg = <0x4d>;
 	};
+
+	lm75@4e {
+		compatible = "national,lm75";
+		reg = <0x4e>;
+	};
+
+	lm75@4f {
+		compatible = "national,lm75";
+		reg = <0x4f>;
+	};
+
+	eeprom@50 {
+		compatible = "atmel,24c512";
+		reg = <0x50>;
+	};
 };
 
-&sdmmc {
+&i2c7 {
+	status = "okay";
+};
+
+&i2c8 {
+	status = "okay";
+};
+
+&i2c9 {
+	status = "okay";
+};
+
+&i2c10 {
+	status = "okay";
+};
+
+&i2c11 {
+	status = "okay";
+};
+
+&i2c12 {
+	status = "okay";
+};
+
+&i2c13 {
+	status = "okay";
+};
+
+
+&pwm_tacho {
+	status = "okay";
+
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_pwm0_default
+		&pinctrl_pwm1_default
+		&pinctrl_pwm2_default
+		&pinctrl_pwm3_default
+		&pinctrl_pwm4_default
+		&pinctrl_pwm5_default
+		&pinctrl_pwm6_default
+		&pinctrl_pwm7_default>;
+
+	fan@0 {
+		reg = <0x00>;
+		aspeed,fan-tach-ch = /bits/ 8 <0x00>;
+	};
+
+	fan@1 {
+		reg = <0x01>;
+		aspeed,fan-tach-ch = /bits/ 8 <0x01>;
+	};
+
+	fan@2 {
+		reg = <0x02>;
+		aspeed,fan-tach-ch = /bits/ 8 <0x02>;
+	};
+
+	fan@3 {
+		reg = <0x03>;
+		aspeed,fan-tach-ch = /bits/ 8 <0x03>;
+	};
+
+	fan@4 {
+		reg = <0x04>;
+		aspeed,fan-tach-ch = /bits/ 8 <0x04>;
+	};
+
+	fan@5 {
+		reg = <0x05>;
+		aspeed,fan-tach-ch = /bits/ 8 <0x05>;
+	};
+
+	fan@6 {
+		reg = <0x06>;
+		aspeed,fan-tach-ch = /bits/ 8 <0x06>;
+	};
+
+	fan@7 {
+		reg = <0x07>;
+		aspeed,fan-tach-ch = /bits/ 8 <0x07>;
+	};
+};
+
+&gpio {
+	status = "okay";
+};
+
+&adc {
 	status = "okay";
 };
 
@@ -123,6 +291,12 @@
 
 &uhci {
 	status = "okay";
+};
+
+
+&video {
+	status = "okay";
+	memory-region = <&video_engine_memory>;
 };
 
 &gfx {
