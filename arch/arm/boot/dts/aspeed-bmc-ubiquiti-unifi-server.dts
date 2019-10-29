@@ -261,7 +261,26 @@
 };
 
 &gpio {
-	status = "okay";
+	pin_gpio_b0 {
+		gpio-hog;
+		gpios = <ASPEED_GPIO(B, 0) GPIO_ACTIVE_LOW>;
+		output-high;
+		line-name = "FP_ID_LED_BMC_N";
+	};
+
+	pin_gpio_b2 {
+		gpio-hog;
+		gpios = <ASPEED_GPIO(B, 2) GPIO_ACTIVE_LOW>;
+		output-high;
+		line-name = "FM_ME_RCVR_N";
+	};
+
+	pin_gpio_b3 {
+		gpio-hog;
+		gpios = <ASPEED_GPIO(B, 3) GPIO_ACTIVE_LOW>;
+		output-high;
+		line-name = "JTAG_PLD_SW1_SEL_R";
+	};
 };
 
 &adc {
