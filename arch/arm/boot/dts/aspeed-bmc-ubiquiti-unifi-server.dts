@@ -263,23 +263,107 @@
 &gpio {
 	pin_gpio_b0 {
 		gpio-hog;
-		gpios = <ASPEED_GPIO(B, 0) GPIO_ACTIVE_LOW>;
+		gpios = <ASPEED_GPIO(B, 0) GPIO_ACTIVE_HIGH>;
 		output-high;
 		line-name = "FP_ID_LED_BMC_N";
 	};
 
 	pin_gpio_b2 {
 		gpio-hog;
-		gpios = <ASPEED_GPIO(B, 2) GPIO_ACTIVE_LOW>;
+		gpios = <ASPEED_GPIO(B, 2) GPIO_ACTIVE_HIGH>;
 		output-high;
 		line-name = "FM_ME_RCVR_N";
 	};
 
 	pin_gpio_b3 {
 		gpio-hog;
-		gpios = <ASPEED_GPIO(B, 3) GPIO_ACTIVE_LOW>;
+		gpios = <ASPEED_GPIO(B, 3) GPIO_ACTIVE_HIGH>;
 		output-high;
 		line-name = "JTAG_PLD_SW1_SEL_R";
+	};
+
+	pin_gpio_b7 {
+		gpio-hog;
+		gpios = <ASPEED_GPIO(B, 7) GPIO_ACTIVE_LOW>;
+		output-low;
+		line-name = "JTAG_PLD_SW1_OE_R";
+	};
+
+	pin_gpio_d5 {
+		gpio-hog;
+		gpios = <ASPEED_GPIO(D, 5) GPIO_ACTIVE_LOW>;
+		output-low;
+		line-name = "BMC_PHY_RESET_R_N";
+	};
+
+	pin_gpio_d6 {
+		gpio-hog;
+		gpios = <ASPEED_GPIO(D, 6) GPIO_ACTIVE_LOW>;
+		output-low;
+		line-name = "TP_GPIOD6";
+	};
+
+	pin_gpio_d7 {
+		gpio-hog;
+		gpios = <ASPEED_GPIO(D, 7) GPIO_ACTIVE_LOW>;
+		output-low;
+		line-name = "RST_RTCRST_BMCOUT_N";
+	};
+
+	pin_gpio_e1 {
+		gpio-hog;
+		gpios = <ASPEED_GPIO(E, 1) GPIO_ACTIVE_HIGH>;
+		output-high;
+		line-name = "RST_BMC_RSTBTN_OUT_N";
+	};
+
+	pin_gpio_e3 {
+		gpio-hog;
+		gpios = <ASPEED_GPIO(E, 3) GPIO_ACTIVE_HIGH>;
+		output-high;
+		line-name = "FW_BMC_PWR_BTN_N";
+	};
+
+	pin_gpio_f0 {
+		gpio-hog;
+		gpios = <ASPEED_GPIO(F, 0) GPIO_ACTIVE_LOW>;
+		output-low;
+		line-name = "IRQ_BMC_PCH_NMI";
+	};
+
+	pin_gpio_f1 {
+		gpio-hog;
+		gpios = <ASPEED_GPIO(F, 1) GPIO_ACTIVE_HIGH>;
+		output-high;
+		line-name = "FM_CPU1_DISABLE_COD_N";
+	};
+
+	pin_gpio_f2 {
+		gpio-hog;
+		gpios = <ASPEED_GPIO(F, 2) GPIO_ACTIVE_HIGH>;
+		output-high;
+		line-name = "FM_BMC_FLASH_WP_N";
+	};
+
+	pin_gpio_f4 {
+		gpio-hog;
+		gpios = <ASPEED_GPIO(F, 4) GPIO_ACTIVE_LOW>;
+		output-low;
+		line-name = "FM_SKT0_FAULT_LED";
+	};
+
+	pin_gpio_g4 {
+		gpio-hog;
+		gpios = <ASPEED_GPIO(G, 4) GPIO_ACTIVE_LOW>;
+		output-low;
+		line-name = "FM_SPI_SEL";
+	};
+
+	pin_gpio_g7 {
+		gpio-hog;
+		gpios = <ASPEED_GPIO(G, 7) GPIO_ACTIVE_HIGH>;
+		output-high;
+		line-name = "VGA_CONN_R_SEL";
 	};
 };
 
