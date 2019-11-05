@@ -283,6 +283,40 @@
 	};
 };
 
+&adc {
+	status = "okay";
+};
+
+&sdhci0 {
+	status = "okay";
+
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_sd1_default>;
+};
+
+/*
+ * Enable port A as device (via the virtual hub) and port B as
+ * host by default on the eval board. This can be easily changed
+ * by replacing the override below with &ehci0 { ... } to enable
+ * host on both ports.
+ */
+&vhub {
+	status = "okay";
+};
+
+&ehci1 {
+	status = "okay";
+};
+
+&uhci {
+	status = "okay";
+};
+
+&video {
+	status = "okay";
+	memory-region = <&video_engine_memory>;
+};
+
 &gpio {
 	pin_gpio_b0 {
 		gpio-hog;
@@ -308,7 +342,7 @@
 	pin_gpio_b7 {
 		gpio-hog;
 		gpios = <ASPEED_GPIO(B, 7) GPIO_ACTIVE_LOW>;
-		output-low;
+		output-high;
 		line-name = "JTAG_PLD_SW1_OE_R";
 	};
 
@@ -350,21 +384,21 @@
 	pin_gpio_d5 {
 		gpio-hog;
 		gpios = <ASPEED_GPIO(D, 5) GPIO_ACTIVE_LOW>;
-		output-low;
+		output-high;
 		line-name = "BMC_PHY_RESET_R_N";
 	};
 
 	pin_gpio_d6 {
 		gpio-hog;
 		gpios = <ASPEED_GPIO(D, 6) GPIO_ACTIVE_LOW>;
-		output-low;
+		output-high;
 		line-name = "TP_GPIOD6";
 	};
 
 	pin_gpio_d7 {
 		gpio-hog;
 		gpios = <ASPEED_GPIO(D, 7) GPIO_ACTIVE_LOW>;
-		output-low;
+		output-high;
 		line-name = "RST_RTCRST_BMCOUT_N";
 	};
 
@@ -384,7 +418,7 @@
 
 	pin_gpio_f0 {
 		gpio-hog;
-		gpios = <ASPEED_GPIO(F, 0) GPIO_ACTIVE_LOW>;
+		gpios = <ASPEED_GPIO(F, 0) GPIO_ACTIVE_HIGH>;
 		output-low;
 		line-name = "IRQ_BMC_PCH_NMI";
 	};
@@ -405,14 +439,14 @@
 
 	pin_gpio_f4 {
 		gpio-hog;
-		gpios = <ASPEED_GPIO(F, 4) GPIO_ACTIVE_LOW>;
+		gpios = <ASPEED_GPIO(F, 4) GPIO_ACTIVE_HIGH>;
 		output-low;
 		line-name = "FM_SKT0_FAULT_LED";
 	};
 
 	pin_gpio_g4 {
 		gpio-hog;
-		gpios = <ASPEED_GPIO(G, 4) GPIO_ACTIVE_LOW>;
+		gpios = <ASPEED_GPIO(G, 4) GPIO_ACTIVE_HIGH>;
 		output-low;
 		line-name = "FM_SPI_SEL";
 	};
@@ -433,21 +467,21 @@
 
 	pin_gpio_h5 {
 		gpio-hog;
-		gpios = <ASPEED_GPIO(H, 5) GPIO_ACTIVE_LOW>;
+		gpios = <ASPEED_GPIO(H, 5) GPIO_ACTIVE_HIGH>;
 		output-low;
 		line-name = "FM_SKT1_FAULT_LED";
 	};
 
 	pin_gpio_h7 {
 		gpio-hog;
-		gpios = <ASPEED_GPIO(H, 7) GPIO_ACTIVE_LOW>;
+		gpios = <ASPEED_GPIO(H, 7) GPIO_ACTIVE_HIGH>;
 		output-low;
 		line-name = "TP_GPIOH7";
 	};
 
 	pin_gpio_i3 {
 		gpio-hog;
-		gpios = <ASPEED_GPIO(I, 3) GPIO_ACTIVE_LOW>;
+		gpios = <ASPEED_GPIO(I, 3) GPIO_ACTIVE_HIGH>;
 		output-low;
 		line-name = "VBAT_TEST_EN";
 	};
@@ -573,8 +607,8 @@
 
 	pin_gpio_z2 {
 		gpio-hog;
-		gpios = <ASPEED_GPIO(Z, 2) GPIO_ACTIVE_HIGH>;
-		output-high;
+		gpios = <ASPEED_GPIO(Z, 2) GPIO_ACTIVE_LOW>;
+		input;
 		line-name = "FM_BMC_PWRBTN_OUT_N";
 	};
 
@@ -587,7 +621,7 @@
 
 	pin_gpio_aa4 {
 		gpio-hog;
-		gpios = <ASPEED_GPIO(AA, 4) GPIO_ACTIVE_LOW>;
+		gpios = <ASPEED_GPIO(AA, 4) GPIO_ACTIVE_HIGH>;
 		output-low;
 		line-name = "SPEAKER_BMC";
 	};
@@ -614,40 +648,6 @@
 	};
 };
 
-&adc {
-	status = "okay";
-};
-
-&sdhci0 {
-	status = "okay";
-
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_sd1_default>;
-};
-
-/*
- * Enable port A as device (via the virtual hub) and port B as
- * host by default on the eval board. This can be easily changed
- * by replacing the override below with &ehci0 { ... } to enable
- * host on both ports.
- */
-&vhub {
-	status = "okay";
-};
-
-&ehci1 {
-	status = "okay";
-};
-
-&uhci {
-	status = "okay";
-};
-
-
-&video {
-	status = "okay";
-	memory-region = <&video_engine_memory>;
-};
 
 &gfx {
      status = "okay";
